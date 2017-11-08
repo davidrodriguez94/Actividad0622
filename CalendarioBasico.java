@@ -7,18 +7,18 @@
 public class CalendarioBasico
 {
     // Declarando variables dia, mes y año
-    private int dia;
-    private int mes;
-    private int ano;
+    private DisplayDosCaracteres nDia;
+    private DisplayDosCaracteres nMes;
+    private DisplayDosCaracteres nAno;
 
     /**
      * Constructor de la clase CalendarioBasico
      */ 
     public CalendarioBasico()
     {
-        dia = 1;
-        mes = 1;
-        ano = 1;
+        nDia = new DisplayDosCaracteres(31);
+        nMes = new DisplayDosCaracteres(13);
+        nAno = new DisplayDosCaracteres(100);
     }
 
     /**
@@ -26,9 +26,9 @@ public class CalendarioBasico
      */
     public void fijarFecha(int nuevoDia, int nuevoMes, int nuevoAno)
     {
-        dia = nuevoDia;
-        mes = nuevoMes;
-        ano = nuevoAno;
+        nDia.setValorAlmacenado(nuevoDia);
+        nMes.setValorAlmacenado(nuevoMes);
+        nAno.setValorAlmacenado(nuevoAno);
     }
 
     /**
@@ -36,33 +36,18 @@ public class CalendarioBasico
      */
     public String obtenerFecha()
     {
-        String textoADevolver = "";
-        String parte1 = dia + "";
-        String parte2 = mes + "";
-        String parte3 = ano + "";
-        if (parte1.length() < 2) {
-            parte1 = "0" + parte1;  
-        }
-        if (mes < 10) {
-            parte2 = "0" + parte2;
-
-            if (ano < 10) {
-                parte3 = "0" + parte3;
-            }
-            textoADevolver = parte1 + "-" + parte2 + "-" + parte3;
-        }
-        return textoADevolver;
+        String devolverFecha;
+        devolverFecha = nDia.getTextoDelDisplay() + "-" + nMes.getTextoDelDisplay() + "-" + nAno.getTextoDelDisplay();
+        return devolverFecha;
     }
 
     public void avanzarFecha()
     {
-        dia = dia + 1;
-        if (dia == 31){
-            dia = 1;
-            mes = mes + 1;
-            if (mes == 13) {
-                mes = 1;
-                ano += 1;
+        nDia.incrementaValorAlmacenado();
+        if (nDia.getValorAlmacenado() == 1){
+            nMes.incrementaValorAlmacenado();
+            if(nMes.getValorAlmacenado() == 1){
+                nAno.incrementaValorAlmacenado();
             }
         }
     }
